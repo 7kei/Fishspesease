@@ -1,0 +1,32 @@
+{
+  "version": 2,
+  "builds": [
+    {
+      "src": "api/index.py",
+      "use": "@vercel/python",
+      "config": {
+        "maxLambdaSize": "100mb",
+        "runtime": "python3.9"
+      }
+    },
+    {
+      "src": "index.html",
+      "use": "@vercel/static"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/api/predict",
+      "dest": "api/index.py"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "index.html"
+    }
+  ],
+  "functions": {
+    "api/index.py": {
+      "memory": 3008
+    }
+  }
+}
